@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".UseCardFragment">
+
+    <TextView
+        android:id="@+id/textCardSpinner"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Choose the card you want to use for paying or withdrawing money"
+        android:textAlignment="center"/>
+
+    <Spinner
+        android:id="@+id/spinnerCard"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textCardSpinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/textViewMoneyCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerCard"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:text="Money in the card:" />
+
+    <TextView
+        android:id="@+id/cardMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerCard"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/textViewCardWithdraw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewMoneyCard"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:text="Withdraw limit:"/>
+
+    <TextView
+        android:id="@+id/cardWithdraw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardMoney"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewCardPay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewCardWithdraw"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:text="Pay limit:"/>
+
+    <TextView
+        android:id="@+id/cardPay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardWithdraw"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewCardArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewCardPay"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:text="Area:"/>
+
+    <TextView
+        android:id="@+id/cardArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardPay"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/textViewChoice"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerCard"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="Do you want to pay or withdraw?"
+        android:textAlignment="center"/>
+
+    <Switch
+        android:id="@+id/switchWithdraw"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewChoice"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Withdraw" />
+
+    <Switch
+        android:id="@+id/switchPay"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/switchWithdraw"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Pay" />
+
+    <TextView
+        android:id="@+id/areaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewCardArea"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Where do you pay or withdraw?"
+        android:textAlignment="center"/>
+
+    <Switch
+        android:id="@+id/worldSwitch"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/areaTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Whole world"
+        android:textAlignment="center"/>
+
+    <Switch
+        android:id="@+id/europeSwitch"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/areaTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Europe"
+        android:textAlignment="center"/>
+
+    <Switch
+        android:id="@+id/nordicSwitch"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/worldSwitch"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:text="Nordic countries and Estonia"
+        android:textAlignment="center"/>
+
+    <Switch
+        android:id="@+id/finlandSwitch"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/europeSwitch"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:text="Finland"
+        android:textAlignment="center"/>
+
+
+
+    <TextView
+        android:id="@+id/withdrawText"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewCardArea"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="150dp"
+        android:text="How much do you want to withdraw"
+        android:textAlignment="center"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/withdrawAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewCardArea"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="135dp"
+        android:layout_toEndOf="@+id/withdrawText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Withdraw amount"
+            android:inputType="number"
+            android:textSize="14dp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/payText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/switchPay"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="210dp"
+        android:text="Give the account number you want to pay to and the amount of money you want to pay"
+        android:textAlignment="center"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/toAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/payText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:hint="Account you want to pay to"
+            android:textSize="14dp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cardPayAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/payText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:hint="Amount to pay"
+            android:inputType="number"
+            android:textSize="14dp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/useCardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp" />
+
+</RelativeLayout>
