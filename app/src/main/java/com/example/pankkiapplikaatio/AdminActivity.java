@@ -21,7 +21,6 @@ public class AdminActivity extends AppCompatActivity {
     ListView accountList;
     ListView cardList;
     ListView transactionList;
-
     private BankDbHelper db;
 
     @Override
