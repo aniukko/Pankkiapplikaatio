@@ -8,6 +8,7 @@ public class Card {
     private int payLimit;
     private String area;
 
+    //Empty constructor for the BankDbHelper
     public Card() {}
 
     public Card(String un, String an, int wl, int pl, String a) {
@@ -34,7 +35,7 @@ public class Card {
         this.accNum = accNum;
     }
 
-    public float getWithdrawLimit() {
+    public int getWithdrawLimit() {
         return withdrawLimit;
     }
 
@@ -42,7 +43,7 @@ public class Card {
         this.withdrawLimit = withdrawLimit;
     }
 
-    public float getPayLimit() {
+    public int getPayLimit() {
         return payLimit;
     }
 

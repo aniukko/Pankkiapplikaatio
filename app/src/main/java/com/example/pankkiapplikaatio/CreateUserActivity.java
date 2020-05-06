@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 //For creating a new user
 public class CreateUserActivity extends AppCompatActivity {
 
-    //For creating requirements for the password
+    //Creates the requirements that the password needs to meet
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" +                     //at least 1 digit
@@ -35,11 +35,15 @@ public class CreateUserActivity extends AppCompatActivity {
 
     private BankDbHelper db;
 
+    //Getting the access to the file that writes XML-files
+    WriteXML writeXML = new WriteXML();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
 
+        //Getting the access to the BankDbHelper
         db = new BankDbHelper(this);
 
         username = findViewById(R.id.username);
@@ -52,17 +56,20 @@ public class CreateUserActivity extends AppCompatActivity {
         createUser();
     }
 
-    //Creates a new user, adds it to the database and returns to the log in screen
+    //Creates a new user, adds it to the database, creates a new XML-file and returns to the log in screen
     private void createUser() {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validateUsername();
                 validatePassword();
+                //Creates a new user, if certain criteria are met
                 if (validateUsername() && validatePassword()) {
                     db.addUsers(username.getEditText().getText().toString(), password.getEditText().getText().toString(),
                             name.getEditText().getText().toString(), address.getEditText().getText().toString(),
                             phoneNum.getEditText().getText().toString());
+                    writeXML.writeUsers(CreateUserActivity.this, db);
+
                     Toast.makeText(CreateUserActivity.this, "User " +
                             username.getEditText().getText().toString() + " created", Toast.LENGTH_LONG).show();
 
@@ -73,8 +80,8 @@ public class CreateUserActivity extends AppCompatActivity {
         });
     }
 
-    //Checks if the new username is valid
-    //If not it gives an error message
+    //Checks if the new username is valid and meets the requirements
+    //If not, gives an error message
     private boolean validateUsername() {
         String input = username.getEditText().getText().toString();
         for (int i = 0; i < db.getAllUsers().size(); i++) {
@@ -95,14 +102,14 @@ public class CreateUserActivity extends AppCompatActivity {
         return true;
     }
 
-    //Checks if the new password is valid
-    //If not it gives an error message
+    //Checks if the new password is valid and meets the requirements
+    //If not, gives an error message
     private boolean validatePassword() {
         String input = password.getEditText().getText().toString();
         if (input.isEmpty()) {
             password.setError("Field can't be empty");
             return false;
-            //Checks if the password matches with the requirements for the password
+            //Checks if the password meets the requirements that the password needs to meet
         } else if (!PASSWORD_PATTERN.matcher(input).matches()) {
             password.setError("Password too weak");
             return false;

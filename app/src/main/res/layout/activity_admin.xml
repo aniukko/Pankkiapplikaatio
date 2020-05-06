@@ -1,8 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".AdminActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/adminHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="ADMIN"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewShowUsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adminHeader"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Choose a user from the application"
+        android:textSize="13dp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/listUsers"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/textViewShowUsers"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/textViewShowAccounts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listUsers"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Choose an account from the application"
+        android:textSize="13dp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/listAccounts"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/textViewShowAccounts"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/textViewShowCards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listAccounts"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Choose a card from the application"
+        android:textSize="13dp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/listCards"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/textViewShowCards"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/textViewShowTransactions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listCards"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="All the transactions in the application"
+        android:textSize="13dp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/listTransactions"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/textViewShowTransactions"
+        android:layout_marginTop="5dp" />
+
+</RelativeLayout>

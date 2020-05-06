@@ -8,6 +8,7 @@ public class Users {
     private String phoneNum;
     private String address;
 
+    //Empty constructor for the BankDbHelper
     public Users() {}
 
     public Users (String u, String p, String n, String pn, String a) {

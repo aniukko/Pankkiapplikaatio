@@ -1,5 +1,6 @@
 package com.example.pankkiapplikaatio;
 
+//Includes information of transactions
 public class Transactions {
     private String fromAcc;
     private String fromBank;
@@ -11,6 +12,7 @@ public class Transactions {
     private String time;
     private String description;
 
+    //Empty constructor for the BankDbHelper
     public Transactions(){}
 
     public Transactions(String fromAcc, String fromBank, String fromBic, String toAcc,

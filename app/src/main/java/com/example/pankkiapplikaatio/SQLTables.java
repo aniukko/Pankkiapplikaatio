@@ -2,9 +2,9 @@ package com.example.pankkiapplikaatio;
 
 import android.provider.BaseColumns;
 
-//Includes the structures for database tables
-public final class BankContract {
-    private BankContract() {}
+//Includes the table and column names for all the database tables
+public final class SQLTables {
+    private SQLTables() {}
 
     public static class BankTable {
         public static final String TABLE_NAME = "banks";
@@ -30,6 +30,7 @@ public final class BankContract {
         public static final String COLUMN_BALANCE = "balance";
         public static final String COLUMN_LIMIT = "credit_limit";
         public static final String COLUMN_INTEREST = "interest_rate";
+        public static final String COLUMN_ALLOW_PAYMENTS = "allow_payments";
     }
 
     public static class CardTable implements BaseColumns {

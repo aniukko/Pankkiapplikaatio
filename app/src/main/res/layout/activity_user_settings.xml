@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/text"
@@ -10,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="100dp"
         android:text="Edit user information"
         android:textSize="20dp" />
@@ -21,26 +21,35 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/text"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="New name"
-            android:textSize="16dp"/>
+            android:textSize="14dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/oldNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text"
+        android:layout_marginTop="35dp"
+        android:text="Old name:"/>
+
+    <TextView
         android:id="@+id/oldName"
-        android:layout_width="170dp"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/text"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="45dp"
-        android:textSize="16dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="35dp"
+        android:layout_toEndOf="@+id/oldNameText"
+        android:textSize="14dp"
+        android:textStyle="bold"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newAddress"
@@ -48,26 +57,34 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/newName"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="New address"
-            android:textSize="16dp"/>
+            android:textSize="14dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/oldAddressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/oldNameText"
+        android:layout_marginTop="45dp"
+        android:text="Old address:"/>
+
+    <TextView
         android:id="@+id/oldAddress"
-        android:layout_width="170dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/oldName"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="65dp"
-        android:textSize="16dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="45dp"
+        android:layout_toEndOf="@+id/oldAddressText"
+        android:textSize="14dp"
+        android:textStyle="bold"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newPhone"
@@ -75,26 +92,35 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/newAddress"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="New phone number"
-            android:textSize="16dp"/>
+            android:textSize="14dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/oldPhoneText"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/oldAddressText"
+        android:layout_marginTop="40dp"
+        android:text="Old phone number:"
+        android:textAlignment="center"/>
+
+    <TextView
         android:id="@+id/oldPhone"
-        android:layout_width="170dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/oldAddress"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="70dp"
-        android:textSize="16dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/oldPhoneText"
+        android:textSize="14dp"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/save"
@@ -102,16 +128,26 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/newPhone"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:text="Save" />
+
+    <Button
+        android:id="@+id/changePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/save"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:text="Change Password"/>
 
     <Button
         android:id="@+id/buttonDelete"
         android:layout_width="230dp"
         android:layout_height="70dp"
-        android:layout_below="@+id/save"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
         android:text="Delete Account" />
+
 
 </RelativeLayout>

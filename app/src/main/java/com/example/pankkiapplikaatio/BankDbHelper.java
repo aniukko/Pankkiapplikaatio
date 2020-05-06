@@ -8,23 +8,25 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.pankkiapplikaatio.BankContract.AccountTable;
-import com.example.pankkiapplikaatio.BankContract.BankTable;
-import com.example.pankkiapplikaatio.BankContract.CardTable;
-import com.example.pankkiapplikaatio.BankContract.TransactionTable;
-import com.example.pankkiapplikaatio.BankContract.UserTable;
+import com.example.pankkiapplikaatio.SQLTables.AccountTable;
+import com.example.pankkiapplikaatio.SQLTables.BankTable;
+import com.example.pankkiapplikaatio.SQLTables.CardTable;
+import com.example.pankkiapplikaatio.SQLTables.TransactionTable;
+import com.example.pankkiapplikaatio.SQLTables.UserTable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//Importing the BankContract file, so that the lines about getting information from the tables are shorter
+//Importing the SQLTables from the SQLTables-file, for making the rows shorter and easier to read
 
 //For handling the database
 public class BankDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "BankDb.db";
     private static final int DATABASE_VERSION = 1;
 
+    //Getting an access to the SQLiteDatabase
     private SQLiteDatabase db = this.getWritableDatabase();
+
 
     public BankDbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -62,6 +64,7 @@ public class BankDbHelper extends SQLiteOpenHelper {
                 AccountTable.COLUMN_BALANCE + " INTEGER, " +
                 AccountTable.COLUMN_LIMIT + " INTEGER, " +
                 AccountTable.COLUMN_INTEREST + " INTEGER, " +
+                AccountTable.COLUMN_ALLOW_PAYMENTS + " BOOLEAN, " +
                 "FOREIGN KEY (" + AccountTable.COLUMN_USERNAME + ") REFERENCES " +
                 UserTable.TABLE_NAME + " (" + UserTable.COLUMN_USERNAME + "), " +
                 "FOREIGN KEY (" + AccountTable.COLUMN_BANK + ") REFERENCES " +
@@ -109,29 +112,26 @@ public class BankDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //Enables the use of foreign keys in the database
     @Override
     public void onConfigure(SQLiteDatabase db) {
         super.onConfigure(db);
         db.setForeignKeyConstraintsEnabled(true);
     }
 
+    //Sets the information of the banks
     private void fillBanksTable() {
-        Bank bankList[] = {new Bank("Nordea", "NDEAFIHH"),
-                new Bank("Osuuspankki", "OKOYFIHH"),
-                new Bank("S-Pankki", "SBANFIHH"),
-                new Bank("Danske Bank", "DABAFIHH")
-        };
-
-        Bank b1 = bankList[0];
+        Bank b1 = new Bank("Nordea", "NDEAFIHH");
         addBank(b1);
-        Bank b2 = bankList[1];
+        Bank b2 = new Bank("Osuuspankki", "OKOYFIHH");
         addBank(b2);
-        Bank b3 = bankList[2];
+        Bank b3 = new Bank("S-Pankki", "SBANFIHH");
         addBank(b3);
-        Bank b4 = bankList[3];
+        Bank b4 = new Bank("Danske Bank", "DABAFIHH");
         addBank(b4);
     }
 
+    //Adds the information of the banks to the bank table
     private void addBank(Bank bank) {
         ContentValues cv = new ContentValues();
         cv.put(BankTable.COLUMN_NAME, bank.getName());
@@ -139,6 +139,7 @@ public class BankDbHelper extends SQLiteOpenHelper {
         db.insert(BankTable.TABLE_NAME, null, cv);
     }
 
+    //Takes information from another .java file and inserts the information of the users to the user table
     public void addUsers(String username, String password, String name, String address, String phoneNumber) {
         ContentValues cv = new ContentValues();
         cv.put(UserTable.COLUMN_USERNAME, username);
@@ -149,7 +150,8 @@ public class BankDbHelper extends SQLiteOpenHelper {
         db.insert(UserTable.TABLE_NAME, null, cv);
     }
 
-    public void addAccount(String accNum, String bank, String username, String type, int balance, int limit, int interest) {
+    //Takes information from another .java file and inserts the information of the accounts to the account table
+    public void addAccount(String accNum, String bank, String username, String type, int balance, int limit, int interest, int canPay) {
         ContentValues cv = new ContentValues();
         cv.put(AccountTable.COLUMN_ACCOUNT_NUMBER, accNum);
         cv.put(AccountTable.COLUMN_BANK, bank);
@@ -158,9 +160,11 @@ public class BankDbHelper extends SQLiteOpenHelper {
         cv.put(AccountTable.COLUMN_BALANCE, balance);
         cv.put(AccountTable.COLUMN_LIMIT, limit);
         cv.put(AccountTable.COLUMN_INTEREST, interest);
+        cv.put(AccountTable.COLUMN_ALLOW_PAYMENTS, canPay);
         db.insert(AccountTable.TABLE_NAME, null, cv);
     }
 
+    //Takes information from another .java file and inserts the information of the cards to the card table
     public void addCard(String user, String accNum, int withdraw, int pay, String area) {
         ContentValues cv = new ContentValues();
         cv.put(CardTable.COLUMN_USERNAME, user);
@@ -171,6 +175,7 @@ public class BankDbHelper extends SQLiteOpenHelper {
         db.insert(CardTable.TABLE_NAME, null, cv);
     }
 
+    //Takes information from another .java file and inserts the information of the transactions to the transaction table
     public void addTransaction(String fromAcc, String fromBank, String fromBic, String toAcc,
                                String toBank, String toBic, int amount, String time, String description) {
         ContentValues cv = new ContentValues();
@@ -186,22 +191,27 @@ public class BankDbHelper extends SQLiteOpenHelper {
         db.insert(TransactionTable.TABLE_NAME, null, cv);
     }
 
-    public void updateUsers(String user, String name, String address, String phoneNumber) {
+    //Takes information for updating the information of a certain user
+    public void updateUsers(String user, String password, String name, String address, String phoneNumber) {
         ContentValues cv = new ContentValues();
+        cv.put("password", password);
         cv.put("name", name);
         cv.put("address", address);
         cv.put("phone_number", phoneNumber);
         db.update(UserTable.TABLE_NAME, cv, "username = ?", new String[]{user});
     }
 
-    public void updateAccount(String accNum, int balance, int limit, int interest) {
+    //Takes information for updating the information of a certain account
+    public void updateAccount(String accNum, int balance, int limit, int interest, int canPay) {
         ContentValues cv = new ContentValues();
         cv.put("balance", balance);
         cv.put("credit_limit", limit);
         cv.put("interest_rate", interest);
+        cv.put("allow_payments", canPay);
         db.update(AccountTable.TABLE_NAME, cv, "account_number = ?", new String[]{accNum});
     }
 
+    //Takes information for updating the information of a certain card
     public void updateCard(String accNum, int withdrawLimit, int payLimit, String area) {
         ContentValues cv = new ContentValues();
         cv.put("withdraw_limit", withdrawLimit);
@@ -210,19 +220,22 @@ public class BankDbHelper extends SQLiteOpenHelper {
         db.update(CardTable.TABLE_NAME, cv, "account_number = ?", new String[]{accNum});
     }
 
+    //Deletes a certain user
     public void deleteUser(String username) {
         db.delete(UserTable.TABLE_NAME, "username = ?", new String[]{username});
     }
 
+    //Deletes a certain account
     public void deleteAccount(String accNum) {
         db.delete(AccountTable.TABLE_NAME, "account_number = ?", new String[]{accNum});
     }
 
+    //Deletes a certain card
     public void deleteCard(String accNum) {
         db.delete(CardTable.TABLE_NAME, "account_number = ?", new String[]{accNum});
     }
 
-    //For getting information from the database, adding it to a list and returning the list
+    //Gets information on the banks from the database, adds the info to a list and returns the list
     public List<Bank> getAllBanks() {
         List<Bank> bankList = new ArrayList<>();
         db = getReadableDatabase();
@@ -240,7 +253,7 @@ public class BankDbHelper extends SQLiteOpenHelper {
         return bankList;
     }
 
-    //For getting information from the database, adding it to a list and returning the list
+    //Gets information on the users from the database, adds the info to a list and returns the list
     public List<Users> getAllUsers() {
         List<Users> userList = new ArrayList<>();
         db = getReadableDatabase();
@@ -261,7 +274,7 @@ public class BankDbHelper extends SQLiteOpenHelper {
         return userList;
     }
 
-    //For getting information from the database, adding it to a list and returning the list
+    //Gets information on the accounts from the database, adds the info to a list and returns the list
     public List<Account> getAllAccounts() {
         List<Account> accountList = new ArrayList<>();
         db = getReadableDatabase();
@@ -277,6 +290,7 @@ public class BankDbHelper extends SQLiteOpenHelper {
                 account.setBalance(c.getInt(c.getColumnIndex(AccountTable.COLUMN_BALANCE)));
                 account.setLimit(c.getInt(c.getColumnIndex(AccountTable.COLUMN_LIMIT)));
                 account.setInterestRate(c.getInt(c.getColumnIndex(AccountTable.COLUMN_INTEREST)));
+                account.setCanPay(c.getInt(c.getColumnIndex(AccountTable.COLUMN_ALLOW_PAYMENTS)));
                 accountList.add(account);
             } while (c.moveToNext());
         }
@@ -284,7 +298,7 @@ public class BankDbHelper extends SQLiteOpenHelper {
         return accountList;
     }
 
-    //For getting information from the database, adding it to a list and returning the list
+    //Gets information on the cards from the database, adds the info to a list and returns the list
     public List<Card> getAllCards() {
         List<Card> cardList = new ArrayList<>();
         db = getReadableDatabase();
@@ -305,6 +319,7 @@ public class BankDbHelper extends SQLiteOpenHelper {
         return cardList;
     }
 
+    //Gets information on the transactions from the database, adds the info to a list and returns the list
     public List<Transactions> getAllTransactions() {
         List<Transactions> transactionList = new ArrayList<>();
         db = getReadableDatabase();

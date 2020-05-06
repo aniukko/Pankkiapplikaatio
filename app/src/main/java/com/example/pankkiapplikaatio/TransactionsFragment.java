@@ -32,6 +32,8 @@ public class TransactionsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_transactions, container, false);
         getActivity().setTitle("Transactions");
+
+        //Getting the access to the BankDbHelper
         db = new BankDbHelper(this.getActivity());
 
         //Getting the username of the logged in user from the MainActivity and saving it
@@ -40,6 +42,7 @@ public class TransactionsFragment extends Fragment {
         accSpinner = view.findViewById(R.id.spinnerAcc);
         transList = view.findViewById(R.id.transList);
 
+        //Adds all the accounts a user has to a list and adds that list to a spinner
         if (db.getAllAccounts().size() == 0) {
             Toast.makeText(getActivity(), "You have no accounts",Toast.LENGTH_LONG).show();
         } else {
@@ -57,35 +60,34 @@ public class TransactionsFragment extends Fragment {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     chosenAcc = parent.getItemAtPosition(position).toString();
                     Toast.makeText(parent.getContext(), "Selected " + chosenAcc, Toast.LENGTH_SHORT).show();
-                }
 
+                    //Adds all the transactions that the chosen account has been a part of to a list and
+                    // adds that list to a listView where you can see all the transactions for the selected user
+                    if (db.getAllTransactions().size() == 0) {
+                        Toast.makeText(getActivity(), "No transactions",Toast.LENGTH_LONG).show();
+                    } else {
+                        List<String> myAccounts = new ArrayList<>();
+                        for (int i = 0; i < db.getAllTransactions().size(); i++) {
+                            if (db.getAllTransactions().get(i).getFromAcc().equals(chosenAcc)) {
+                                myAccounts.add(db.getAllTransactions().get(i).getDescription());
+                            } else if (db.getAllTransactions().get(i).getToAcc().equals(chosenAcc)) {
+                                myAccounts.add(db.getAllTransactions().get(i).getDescription());
+                            }
+                        }
+                        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(),
+                                android.R.layout.simple_list_item_1, myAccounts);
+                        transList.setAdapter(listAdapter);
+                        transList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            }
+                        });
+                    }
+                }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-
                 }
             });
-
-            if (db.getAllTransactions().size() == 0) {
-                Toast.makeText(getActivity(), "No transactions for this account",Toast.LENGTH_LONG).show();
-            } else {
-                List<String> myAccounts = new ArrayList<>();
-                for (int i = 0; i < db.getAllTransactions().size(); i++) {
-                    if (db.getAllTransactions().get(i).getFromAcc().equals(chosenAcc)) {
-                        myAccounts.add(db.getAllTransactions().get(i).getDescription());
-                    } else if (db.getAllTransactions().get(i).getToAcc().equals(chosenAcc)) {
-                        myAccounts.add(db.getAllTransactions().get(i).getDescription());
-                    }
-                }
-                ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(getActivity(),
-                        android.R.layout.simple_list_item_1, myAccounts);
-                transList.setAdapter(listAdapter);
-                transList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //String chosenTrans = transList.getItemAtPosition(position).toString();
-                    }
-                });
-            }
         }
         return view;
     }

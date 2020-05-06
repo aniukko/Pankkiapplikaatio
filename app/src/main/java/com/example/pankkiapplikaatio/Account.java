@@ -2,7 +2,7 @@ package com.example.pankkiapplikaatio;
 
 //Includes information for the accounts
 public class Account {
-    public String subAccounts[] = {"Debit", "Credit", "Savings"};
+    public String[] subAccounts = {"Debit", "Credit", "Savings"};
     private String bank;
     private String username;
     private String accNum;
@@ -10,10 +10,12 @@ public class Account {
     private int balance;
     private int limit;
     private int interestRate;
+    private int canPay;
 
+    //Empty constructor for the BankDbHelper
     public Account() {}
 
-    public Account(String ba, String u, String an, String t, int b, int l, int i) {
+    public Account(String ba, String u, String an, String t, int b, int l, int i, int cp) {
         bank = ba;
         username = u;
         accNum = an;
@@ -21,6 +23,7 @@ public class Account {
         balance = b;
         limit = l;
         interestRate = i;
+        canPay = cp;
     }
 
     public String getBank() {
@@ -77,5 +80,13 @@ public class Account {
 
     public void setInterestRate(int interestRate) {
         this.interestRate = interestRate;
+    }
+
+    public int getCanPay() {
+        return canPay;
+    }
+
+    public void setCanPay(int canPay) {
+        this.canPay = canPay;
     }
 }

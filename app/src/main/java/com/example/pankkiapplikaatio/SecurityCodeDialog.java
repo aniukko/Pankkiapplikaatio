@@ -17,6 +17,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Random;
 
+//A dialog that simulates a security code that needs to be given after the login credentials are correct
 public class SecurityCodeDialog extends AppCompatDialogFragment {
     String logUser;
     private TextInputLayout securityCode;
@@ -31,14 +32,17 @@ public class SecurityCodeDialog extends AppCompatDialogFragment {
         securityCode = view.findViewById(R.id.securityCode);
         logUser = getArguments().getString("loguser");
 
+        //Creating a random number between 100000 and 999999
         Random random = new Random();
         final int ranNumber = random.nextInt(999999 - 100000) + 100000;
 
         builder.setView(view)
+                //The code that needs to be given is in the title
                 .setTitle("Give the following code\n" + ranNumber)
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //If the code is correct, the home page (MainActivity) is loaded
                         if (Integer.parseInt(securityCode.getEditText().getText().toString()) == ranNumber) {
                             securityCode.setError(null);
                             Intent intent = new Intent(getActivity(), MainActivity.class);

@@ -24,7 +24,16 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        //Getting the access to the BankDbHelper
         db = new BankDbHelper(this);
+
+        //Getting the access to the file that writes XML-files
+        WriteXML writeXML = new WriteXML();
+
+        //Writing the XML-file for the banks.
+        //Will be done whenever the app is opened, or the LogInActivity is loaded
+        writeXML.writeBanks(LogInActivity.this, db);
+
         user = findViewById(R.id.username);
         password = findViewById(R.id.password);
 
@@ -52,10 +61,12 @@ public class LogInActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //Logs into the app with an admin account or with a created account that has been saved to a list
+    //Logs into the app with an admin account or with a created account that has been saved to the database
     private void openMainActivity() {
         Bundle b = new Bundle();
+        //Saving the username of the logged in user to a variable
         b.putString("loguser", user.getEditText().getText().toString());
+
         if (user.getEditText().getText().toString().equals("") &&
                 password.getEditText().getText().toString().equals("")) {
             user.setError("Give a username");
@@ -69,22 +80,37 @@ public class LogInActivity extends AppCompatActivity {
         } else {
             user.setError(null);
             password.setError(null);
-            for (int i = 0; i < db.getAllUsers().size(); i++) {
+            if (db.getAllUsers().isEmpty()) {
                 //Checks if the user wants to log in as an admin
                 if (user.getEditText().getText().toString().equals("Admin") &&
                         password.getEditText().getText().toString().equals("12345")) {
                     Intent intent = new Intent(this, AdminActivity.class);
                     startActivity(intent);
-                } else if (user.getEditText().getText().toString().equals(db.getAllUsers().get(i).getUsername()) &&
-                        password.getEditText().getText().toString().equals(db.getAllUsers().get(i).getPassword())) {
-                    user.setError(null);
-                    password.setError(null);
-                    SecurityCodeDialog securityCodeDialog = new SecurityCodeDialog();
-                    securityCodeDialog.setArguments(b);
-                    securityCodeDialog.show(getSupportFragmentManager(), "dialog");
                 } else {
                     user.setError("Username or password incorrect");
                     password.setError("Username or password incorrect");
+                }
+            } else {
+                for (int i = 0; i < db.getAllUsers().size(); i++) {
+                    //Checks if the user wants to log in as an admin
+                    if (user.getEditText().getText().toString().equals("Admin") &&
+                            password.getEditText().getText().toString().equals("12345")) {
+                        Intent intent = new Intent(this, AdminActivity.class);
+                        startActivity(intent);
+
+                    //If the user has given a correct username and password combination, a dialog will
+                    // appear, where the user needs to give a random code, simulating the security code for real banks
+                    } else if (user.getEditText().getText().toString().equals(db.getAllUsers().get(i).getUsername()) &&
+                            password.getEditText().getText().toString().equals(db.getAllUsers().get(i).getPassword())) {
+                        user.setError(null);
+                        password.setError(null);
+                        SecurityCodeDialog securityCodeDialog = new SecurityCodeDialog();
+                        securityCodeDialog.setArguments(b);
+                        securityCodeDialog.show(getSupportFragmentManager(), "dialog");
+                    } /*else {
+                        user.setError("Username or password incorrect");
+                        password.setError("Username or password incorrect");
+                    }*/
                 }
             }
         }

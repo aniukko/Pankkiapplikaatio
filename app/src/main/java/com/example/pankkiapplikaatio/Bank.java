@@ -5,6 +5,7 @@ public class Bank {
     private String name;
     private String BIC;
 
+    //Empty constructor for the BankDbHelper
     public Bank() {}
 
     public Bank(String n, String b) {
@@ -28,6 +29,8 @@ public class Bank {
         this.BIC = BIC;
     }
 
+    //When adding the object to a spinner this method makes sure that you see only the
+    // name of the Bank-object in the spinner
     @Override
     public String toString() {
         return name;

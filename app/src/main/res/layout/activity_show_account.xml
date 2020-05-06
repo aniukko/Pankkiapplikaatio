@@ -6,73 +6,90 @@
     tools:context=".ShowAccountActivity">
 
     <TextView
-        android:id="@+id/header"
+        android:id="@+id/header2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:textAlignment="center"
-        android:textSize="22dp" />
+        android:textSize="22dp"
+        android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/textBank"
+        android:id="@+id/textBank2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="120dp"
-        android:textSize="18dp" />
+        android:textAlignment="center"
+        android:textSize="14dp"
+        android:textStyle="bold"/>
+
+    <Switch
+        android:id="@+id/changeCanPay"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        android:text="Turn on the switch to allow payments from this account"/>
 
     <TextView
-        android:id="@+id/textType"
+        android:id="@+id/textType2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="120dp"
-        android:layout_marginEnd="60dp"
-        android:textSize="18dp" />
+        android:layout_marginEnd="20dp"
+        android:textAlignment="center"
+        android:textSize="14dp"
+        android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/textBalance"
+        android:id="@+id/textBalance2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textBank"
+        android:layout_below="@+id/textBank2"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
-        android:text="Balance"
-        android:textSize="18dp" />
+        android:text="Balance:"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/textLimit"
+        android:id="@+id/textLimit2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textBank"
+        android:layout_below="@+id/textBank2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Limit"
+        android:text="Limit:"
         android:textAlignment="center"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/textInterest"
+        android:id="@+id/textInterest2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textType"
+        android:layout_below="@+id/textType2"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="40dp"
-        android:text="Interest rate"
-        android:textSize="18dp" />
+        android:layout_marginEnd="20dp"
+        android:text="Interest rate:"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/addMoney"
+        android:id="@+id/addMoney2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textBalance"
+        android:layout_below="@+id/textBalance2"
         android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp">
@@ -89,7 +106,7 @@
         android:id="@+id/changeLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textLimit"
+        android:layout_below="@+id/textLimit2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp">
 
@@ -105,7 +122,7 @@
         android:id="@+id/changeInterest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textInterest"
+        android:layout_below="@+id/textInterest2"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp">
@@ -119,30 +136,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/save2"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addMoney"
+        android:layout_below="@+id/addMoney2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="Save" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="200dp"
-        android:text="Card for this account:" />
 
-    <Button
-        android:id="@+id/cardButton"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="120dp" />
 
     <Button
         android:id="@+id/buttonDelete2"
